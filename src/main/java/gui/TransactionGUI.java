@@ -44,6 +44,17 @@ public class TransactionGUI extends JFrame {
                 addProduct(productID);
             }
         });
+
+        removeItemButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                removeItemFromCart();
+            }
+        });
+
+
+
+
     }
 
     private void addProduct(int productID) {
@@ -68,7 +79,7 @@ public class TransactionGUI extends JFrame {
             shoppingCart=new JTable(dtm);
 
 
-            lblTotal.setText(String.valueOf(total));
+            lblTotal.setText("Ksh. "+String.valueOf(total));
 
 
         }
@@ -82,4 +93,17 @@ public class TransactionGUI extends JFrame {
 
         shoppingCart.setModel(dtm);
     }
+
+    private void removeItemFromCart(){
+        if(shoppingCart.getSelectedRow() != -1) {
+            // remove selected row from the model
+            dtm.removeRow(shoppingCart.getSelectedRow());
+            JOptionPane.showMessageDialog(null, "Item removed");
+        }
+    }
+
+    private void clearCart(){
+
+    }
+
 }
