@@ -22,6 +22,7 @@ public class TransactionGUI extends JFrame {
     private JButton backButton;
     private JButton removeItemButton;
     private JButton clearCartButton;
+    private JScrollPane scrollPane;
     private DefaultTableModel dtm;
     private Connection conn;
     private double total=0.00;
@@ -90,14 +91,18 @@ public class TransactionGUI extends JFrame {
         dtm = new DefaultTableModel(
                 null, new String[]{"Item","Quantity","Price"}
         );
-
         shoppingCart.setModel(dtm);
+        shoppingCart.setRowSelectionAllowed(true);
+
     }
 
+
     private void removeItemFromCart(){
-        if(shoppingCart.getSelectedRow() != -1) {
-            // remove selected row from the model
-            dtm.removeRow(shoppingCart.getSelectedRow());
+        DefaultTableModel model = (DefaultTableModel) shoppingCart.getModel();
+        final int rowToBeDeleted = shoppingCart.getSelectedRow();
+        System.out.println("row is!!!!" + rowToBeDeleted);
+        if(rowToBeDeleted != -1){
+            model.removeRow(rowToBeDeleted);
             JOptionPane.showMessageDialog(null, "Item removed");
         }
     }
